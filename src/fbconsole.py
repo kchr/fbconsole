@@ -88,6 +88,7 @@ ACCESS_TOKEN_FILE = '.fb_access_token'
 AUTH_SCOPE = []
 BATCH_REQUEST_LIMIT = 50
 SANDBOX_DOMAIN = None
+API_VERSION = 'v2.0'
 
 AUTH_SUCCESS_HTML = """
 You have successfully logged in to facebook with fbconsole.
@@ -653,7 +654,8 @@ class Client:
         protocol = 'http://'
         if 'access_token' in args or 'client_secret' in args:
             protocol = 'https://'
-        endpoint = "%s%s.facebook.com" % (protocol, subdomain)
+        version = API_VERSION
+        endpoint = "%s%s.facebook.com/%s" % (protocol, subdomain, version)
         return endpoint+str(path)+'?'+urlencode(args)
 
     def get(self, path, params=None):
